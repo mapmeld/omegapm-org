@@ -1,10 +1,10 @@
-# omegapmjs-org
+# omegapm-org
 
 Central website for Ωpm (omega package manager)
 
 ## Security model
 
-OmegaPMJS.org is built with <a href="http://webpy.org">web.py</a>, a simple Python web framework.
+OmegaPM.org is built with <a href="http://webpy.org">web.py</a>, a simple Python web framework.
 Here's why a Node.js-centric tool has its website written in Python:
 
 - if there's a security issue with Node.js, npm, or Ωpm, we should have a communication channel which does not rely on any of those technologies

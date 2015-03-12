@@ -8,22 +8,22 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row-fluid">
+      <div class="row">
         <div class="hero-unit">
           <h1>Ωpm <small>omega package manager</small></h1>
           <h3>an npm variant featuring signed packages and identical builds</h3>
         </div>
       </div>
-      <div class="row-fluid">
+      <div class="row">
         <h3>0.0.5 - what is Ωpm today?</h3>
       </div>
-      <div class="row-fluid">
-        <div class="span4">
+      <div class="row">
+        <div class="col-md-4">
           <h4>Signed</h4>
           <p>A PGP signature verifies that the code you download matches what the developer wrote. OmegaPM can't fake the signature.</p>
           <p>Get signed update messages for your app's packages by running 'omegapm status'</p>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
           <h4>Restricted</h4>
           <p>
             NPM runs arbitrary commands during the install process
@@ -32,34 +32,34 @@
           </p>
           <p>That doesn't stop you or the module from running fs.delete later on... but it does keep the install clean.</p>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
           <h4>Identical</h4>
           <p>The code on your local machine, your server, the Ωpm website, GitHub, and the developer's machine ought to be the same. With JS-only modules, we can have consistent, <a href="https://blog.torproject.org/blog/deterministic-builds-part-one-cyberwar-and-global-compromise">reproducible builds</a>.</p>
           <p>Node's require is replaced with a custom function that checks that modules' SHAs match every time you run your server.</p>
         </div>
       </div>
-      <div class="row-fluid">
+      <div class="row">
         <h3>0.0.6+ - what's next?</h3>
       </div>
-      <div class="row-fluid">
-        <div class="span4">
+      <div class="row">
+        <div class="col-md-4">
           <h4>Open Standards</h4> 
           <p>Ωpm should be able to download modules from a regular git repo, if its commits are signed using
             <span class="nowrap">'git commit -S'</span>.
           </p>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
           <h4>Beating Metadata</h4> 
           <p>Padding and encrypting downloads would keep third parties from knowing what you're downloading.</p>
           <p>The first step would be storing code repos on Ωpm servers, which comes with its own scaling and legal issues.</p>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
           <h4>HTTPS and Tor</h4>
           <p>I launched before becoming HTTPS-ready. Got to work on that.</p>
           <p>You could also use Tails today, but looking forward, Ωpm should have its own hidden service on Tor.</p>
         </div>
       </div>
-      <div class="row-fluid">
+      <div class="row">
         <h4>Join in on GitHub</h4>
         <li class="repo">
           <a href="https://github.com/mapmeld/omegapm">Ωpm CLI - main repo</a>
@@ -77,7 +77,7 @@
           <a href="https://github.com/mapmeld/omega-template-app">Template App - using sqrt</a>
         </li>
       </div>
-      <div class="row-fluid">
+      <div class="row">
         <h4>Thanks to</h4>
         <p>
           <a href="http://keybase.io">Keybase</a> for their awesome directory-signing tool,
@@ -86,7 +86,7 @@
           Their feedback on this project was helpful and informative.
         </p>
       </div>
-      <div class="row-fluid">
+      <div class="row">
         <h4>Contact Me</h4>
         <p>I'm Nick Doiron, a web developer and mapmaker based in New York City.
           <br/>
