@@ -1,0 +1,47 @@
+$def with (modules)
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>OmegaPM - What</title>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="hero-unit">
+          <h1>Ωpm <small>npm install omegapm</small></h1>
+          <h3>an npm variant featuring signed packages and identical builds</h3>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Add a Module</h3>
+	<form action="/modules" method="POST" class="col-md-6">
+		<input class="form-control" name="repo" placeholder="URL to public git repo"/>
+		<input type="submit" class="btn btn-info" value="Verify this module"/>
+	</form>
+      </div>
+      <div class="row">
+        <h3>Available Modules</h3>
+      </div>
+      $for module in modules:
+        <div class="row">
+          Module - FINGERPRINT
+        </div>
+      <hr/>
+      <div class="row">
+        <h4>Issues? Contact me</h4>
+        <p>I'm Nick Doiron, a web developer and mapmaker based in New York City.
+          <br/>
+          - Write me an e-mail: <a href="mailto:ndoiron@mapmeld.com">ndoiron@mapmeld.com</a>
+            (optional) encrypt messages for this key: <a href="https://keybase.io/mapmeld/key.asc">359B 8E77 522B 3449</a>
+          <br/>
+          - Send me a Tweet: <a href="https://twitter.com/mapmeld">@mapmeld</a>
+        </p>
+        <br/><br/><br/><br/>
+      </div>
+    </div>
+  </body>
+</html>

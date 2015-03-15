@@ -13,10 +13,27 @@ Here's why a Node.js-centric tool has its website written in Python:
 
 ## Setup and Run
 
-Install web.py framework, then run the server continuously on standard port 80:
+Install dependencies, then run the server continuously on standard port 80:
 
 ```
+# dependencies
 sudo easy_install web.py
+pip install python-gnupg gitpython
+
+# using Keybase to verify repos and messages (no need to add your own user)
+npm install -g keybase-installer
+keybase-installer
+keybase config
+
+# repo folders
+mkdir ../ommod
+mkdir ../ommod/repo
+
+# running server
 nohup python site.py 80 &
 disown
 ```
+
+## License
+
+GPLv3+

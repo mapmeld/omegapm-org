@@ -15,3 +15,7 @@ li.repo {
 li.repo:first-child {
   margin-left: 0;
 }
+
+pre {
+  word-wrap: normal;
+}
