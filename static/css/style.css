@@ -19,3 +19,16 @@ li.repo:first-child {
 pre {
   word-wrap: normal;
 }
+
+.row h3 {
+  padding-bottom: 3px;
+  border-bottom: 1px solid #000;
+}
+
+.hero-unit h3 {
+  border: none;
+}
+
+input.form-control {
+  margin-bottom: 4px;
+}

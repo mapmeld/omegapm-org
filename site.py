@@ -1,7 +1,7 @@
 # add dependencies
 from datetime import datetime
-import string, os, re
-import web
+import string, os, re, subprocess
+import web, git
 import signatures
 
 # list all of the URLs for the server
@@ -13,6 +13,9 @@ urls = (
 
 # prepare to render template files
 app = None
+fingerprints = {}
+git_urls = {}
+mod_shas = {}
 render = web.template.render("templates/")
 
 # homepage
@@ -25,11 +28,39 @@ class index:
 class modules:
 	# /modules
 	def GET(self):
-		potential_repos = os.listdir('../ommod/repo/')
+		potential_repos = os.listdir('../ommod/node_modules/')
 		repos = []
 		for repo in potential_repos:
 			if os.path.exists('../ommod/' + repo + '.sig') and os.path.isfile('../ommod/' + repo + '.sig'):
-				repos.append(repo)
+				fingerprint = ""
+				if repo in fingerprints:
+					fingerprint = fingerprints[repo]
+				else:
+					fpfile = open('../ommod/' + repo + '.sig', 'r')
+					fingerprint = fpfile.read()
+					fpfile.close()
+
+				git_url = ""
+				if repo in git_urls:
+					git_url = git_urls[repo]
+				else:
+					git_data = git.Repo('../ommod/node_modules/' + repo)
+					git_origin = git_data.remotes.origin.url
+					git_sha = str(git_data.refs[0].log()[0]).split(" ")[1][:10]
+					git_url = git_origin + "#" + git_sha
+
+				sha = ""
+				if repo in mod_shas:
+					sha = mod_shas[repo]
+				else:
+					process = subprocess.Popen(['omegapm-hash', repo], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, cwd='../ommod/')
+        				out, err = process.communicate()
+					if (err):
+						sha = ""
+					else:
+						sha = out.split("\n")[0]
+
+				repos.append({ "name": repo, "fingerprint": fingerprint, "git": git_url, "sha": sha })
 		return render.modules(repos)
 
 	def POST(self):
@@ -39,7 +70,7 @@ class modules:
 			repo_url = re.sub(r"\\", "", repo_url)
 			if repo_url.find('github.com') > -1 and repo_url.find('@') == -1 and repo_url.find('.git') == -1:
 				repo_url = repo_url + '.git'
-			os.system('cd ../ommod/repo && git clone ' + repo_url + ' && python ../../omegapm-org/update_modules.py &')
+			os.system('cd ../ommod/node_modules && git clone ' + repo_url + ' && python ../../omegapm-org/update_modules.py &')
 			return "ok, I'm going to try that. Check back on /modules soon."
 		except:
 			return "couldn't process that module posting =-("

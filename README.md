@@ -20,6 +20,10 @@ Install dependencies, then run the server continuously on standard port 80:
 sudo easy_install web.py
 pip install python-gnupg gitpython
 
+# installing Node.js and associated packages
+sudo apt-get install nodejs nodejs-legacy npm
+npm install -g omegapm-require
+
 # using Keybase to verify repos and messages (no need to add your own user)
 npm install -g keybase-installer
 keybase-installer
@@ -27,7 +31,7 @@ keybase config
 
 # repo folders
 mkdir ../ommod
-mkdir ../ommod/repo
+mkdir ../ommod/node_modules
 
 # running server
 nohup python site.py 80 &
