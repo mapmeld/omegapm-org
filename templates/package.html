@@ -5,8 +5,8 @@ $def with (modules)
   <head>
     <meta charset="utf-8"/>
     <title>OmegaPM - What</title>
-    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
   </head>
   <body>
     <div class="container-fluid">
@@ -17,22 +17,25 @@ $def with (modules)
         </div>
       </div>
       <div class="row">
-        <h3>Add a Package</h3>
-	<form action="/packages" method="POST" class="col-md-6">
-          <input class="form-control" name="repo" placeholder="URL to public git repo"/>
-          <input type="submit" class="btn btn-info" value="Verify this module"/>
-	</form>
-      </div>
-      <div class="row">
-        <h3>Available Packages</h3>
+        <h3>This package</h3>
       </div>
       $for module in modules:
         <div class="row">
-          &quot;<a href='/package/$module["name"]'>$module["name"]</a>&quot;: "$module['git']"
-          &nbsp;&nbsp;&nbsp;___&nbsp;&nbsp;&nbsp;
-          Ω("$module['name']", "$module['sha']", callback);
-          <br/>
-          Developer fingerprint: $module["fingerprint"]
+          <ul class="instructions">
+            <li>
+              Add this into package.json:<br/>
+              &quot;<a href='/package/$module["name"]'>$module["name"]</a>&quot;: "$module['git']"
+            </li>
+            <li>
+              Add this into your server in place of 'require':<br/>
+              Ω("$module['name']", "$module['sha']", function(module) {<br/>
+              });
+            </li>
+            <li>
+              Expect this developer fingerprint on package updates and messages:<br/>
+              $module["fingerprint"]
+            </li>
+          </ul>
         </div>
       <hr/>
       <div class="row">

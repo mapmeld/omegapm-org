@@ -9,6 +9,7 @@ urls = (
 	'/', 'index',
 	'/sign', 'sign',
 	'/packages', 'packages',
+	'/package/(.+)', 'package',
 	'/messages/(.+)', 'messages'
 )
 
@@ -71,7 +72,7 @@ class packages:
 			repo_url = re.sub(r"\\", "", repo_url)
 			if repo_url.find('github.com') > -1 and repo_url.find('@') == -1 and repo_url.find('.git') == -1:
 				repo_url = repo_url + '.git'
-			os.system('cd ../ommod/node_modules && git clone ' + repo_url + ' && python ../../omegapm-org/update_modules.py &')
+			os.system('cd ../ommod/node_modules && git clone ' + repo_url + ' && python update_modules.py &')
 			return "ok, I'm going to try that. Check back on <a href='/packages'>/packages</a> soon."
 		except:
 			return "couldn't process that module posting =-("
@@ -117,6 +118,42 @@ class sign:
 				return "that didn't look like a signed message =-("
 		except:
 			return "couldn't process that message =-("
+
+class package:
+	def GET(self, repo):
+		if os.path.exists('../ommod/' + repo + '.sig') and os.path.isfile('../ommod/' + repo + '.sig'):
+			fingerprint = ""
+			if repo in fingerprints:
+				fingerprint = fingerprints[repo]
+			else:
+				fpfile = open('../ommod/' + repo + '.sig', 'r')
+				fingerprint = fpfile.read()
+				fpfile.close()
+
+			git_url = ""
+			if repo in git_urls:
+				git_url = git_urls[repo]
+			else:
+				git_data = git.Repo('../ommod/node_modules/' + repo)
+				git_origin = git_data.remotes.origin.url
+				git_sha = str(git_data.refs[0].log()[0]).split(" ")[1][:10]
+				git_url = git_origin + "#" + git_sha
+
+			sha = ""
+			if repo in mod_shas:
+				sha = mod_shas[repo]
+			else:
+				process = subprocess.Popen(['omegapm-hash', repo], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True, cwd='../ommod/')
+       				out, err = process.communicate()
+				if (err):
+					sha = ""
+				else:
+					sha = out.split("\n")[0]
+
+			repos = [ { "name": verify_filename(repo), "fingerprint": verify_filename(fingerprint), "git": git_url, "sha": verify_filename(sha) } ]
+			return render.package(repos)
+		else:
+			return "I don't know that package =-("
 
 class messages:
 	def GET(self, package):

@@ -36,3 +36,7 @@ input.form-control {
 .small-text {
   font-size: 8pt;
 }
+
+.instructions li {
+  margin-bottom: 10px;
+}
