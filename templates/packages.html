@@ -17,14 +17,14 @@ $def with (modules)
         </div>
       </div>
       <div class="row">
-        <h3>Add a Module</h3>
+        <h3>Add a Package</h3>
 	<form action="/modules" method="POST" class="col-md-6">
           <input class="form-control" name="repo" placeholder="URL to public git repo"/>
           <input type="submit" class="btn btn-info" value="Verify this module"/>
 	</form>
       </div>
       <div class="row">
-        <h3>Available Modules</h3>
+        <h3>Available Packages</h3>
       </div>
       $for module in modules:
         <div class="row">

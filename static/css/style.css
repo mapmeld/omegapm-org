@@ -32,3 +32,7 @@ pre {
 input.form-control {
   margin-bottom: 4px;
 }
+
+.small-text {
+  font-size: 8pt;
+}

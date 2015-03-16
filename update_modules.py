@@ -8,6 +8,7 @@ missing_repos = []
 for repo in potential_repos:
 	if not os.path.exists('../ommod/' + repo + '.sig'):
 		missing_repos.append(repo)
+		os.system('mkdir ../ommod/' + repo)
 
 for repo in missing_repos:
 	print(repo)
@@ -15,7 +16,7 @@ for repo in missing_repos:
 	out, err = process.communicate()
 	if err or out.find('Could not open') > -1 or out.find('error') > -1:
 		print("didn't work")
-		os.system('rm -rf ../ommod/node_modules/' + repo)
+		# os.system('rm -rf ../ommod/node_modules/' + repo)
 	else:
 		print("adding")
 		fingerprint = out.split("fingerprint: ")[1].split("\n")[0][:-5].replace(" ", "")

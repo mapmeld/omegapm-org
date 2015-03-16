@@ -30,17 +30,17 @@
             (<a href="https://github.com/joaojeronimo/rimrafall#rimrafall">that can be dangerous!</a>).
             OmegaPM won't run scripts, even to compile code.
           </p>
-          <p>That doesn't stop you or the module from running fs.delete later on... but it does keep the install clean.</p>
+          <p>That doesn't stop you or the package from running fs.delete later on... but it does keep the install clean.</p>
         </div>
         <div class="col-md-4">
           <h4>Identical</h4>
-          <p>The code on your local machine, your server, the Ωpm website, GitHub, and the developer's machine ought to be the same. With JS-only modules, we can have consistent, <a href="https://blog.torproject.org/blog/deterministic-builds-part-one-cyberwar-and-global-compromise">reproducible builds</a>.</p>
-          <p>Node's require is replaced with a custom function that checks that modules' SHAs match every time you run your server.</p>
+          <p>The code on your local machine, your server, the Ωpm website, GitHub, and the developer's machine ought to be the same. With JS-only packages, we can have consistent, <a href="https://blog.torproject.org/blog/deterministic-builds-part-one-cyberwar-and-global-compromise">reproducible builds</a>.</p>
+          <p>Node's require is replaced with a custom function that checks that packages' SHAs match every time you run your server.</p>
         </div>
       </div>
       <div class="row">
         <h3>Packages</h3>
-        <a href="/modules">See what's available, and add new packages.</a>
+        <a href="/packages">See what's available, and add new packages.</a>
       </div>
       <div class="row">
         <h3>0.0.6+ - what's next?</h3>
@@ -48,8 +48,8 @@
       <div class="row">
         <div class="col-md-4">
           <h4>Open Standards</h4> 
-          <p>Ωpm should be able to download modules from a regular git repo, if its commits are signed using
-            <span class="nowrap">'git commit -S'</span>.
+          <p>Ωpm should be able to download packages from a regular git repo, if its commits are signed using
+            <span class="nowrap">'git commit -S'</span>. It should be able to accept packages signed with gpg-zip or other open signing systems.
           </p>
         </div>
         <div class="col-md-4">
@@ -70,7 +70,7 @@
         </li>
         /
         <li class="repo">
-          <a href="https://github.com/mapmeld/omega-sqrt">sqrt - a sample signed module</a>
+          <a href="https://github.com/mapmeld/omega-sqrt">sqrt - a sample signed package</a>
         </li>
         /
         <li class="repo">

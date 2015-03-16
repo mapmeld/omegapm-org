@@ -8,7 +8,7 @@ import signatures
 urls = (
 	'/', 'index',
 	'/sign', 'sign',
-	'/modules', 'modules'
+	'/packages', 'packages'
 )
 
 # prepare to render template files
@@ -25,8 +25,8 @@ class index:
 		return render.index()
 
 # listing and adding modules
-class modules:
-	# /modules
+class packages:
+	# /packages
 	def GET(self):
 		potential_repos = os.listdir('../ommod/node_modules/')
 		repos = []
@@ -60,8 +60,8 @@ class modules:
 					else:
 						sha = out.split("\n")[0]
 
-				repos.append({ "name": repo, "fingerprint": fingerprint, "git": git_url, "sha": sha })
-		return render.modules(repos)
+				repos.append({ "name": verify_filename(repo), "fingerprint": verify_filename(fingerprint), "git": git_url, "sha": verify_filename(sha) })
+		return render.packages(repos)
 
 	def POST(self):
 		try:
@@ -71,7 +71,7 @@ class modules:
 			if repo_url.find('github.com') > -1 and repo_url.find('@') == -1 and repo_url.find('.git') == -1:
 				repo_url = repo_url + '.git'
 			os.system('cd ../ommod/node_modules && git clone ' + repo_url + ' && python ../../omegapm-org/update_modules.py &')
-			return "ok, I'm going to try that. Check back on /modules soon."
+			return "ok, I'm going to try that. Check back on <a href='/packages'>/packages</a> soon."
 		except:
 			return "couldn't process that module posting =-("
 
@@ -88,7 +88,8 @@ class sign:
 			verified = signatures.get_key_from_message(msg)
 			if verified and verified.valid:
 				unix_time = int((datetime.now() - datetime(1970, 1, 1)).total_seconds())
-				if verified.expire_timestamp == 0 or verified.expire_timestamp < unix_time:
+				expiry = int(verified.expire_timestamp)
+				if expiry == 0 or expiry < unix_time:
 					# ok, good to go
 					# verified.pubkey_fingerprint = HEXCODE
 					# verified.signature_id = sample/sample
@@ -116,9 +117,9 @@ class sign:
 		except:
 			return "couldn't process that message =-("
 
-	def verify_filename(fname):
-		valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
-		return ''.join(c for c in fname if c in valid_chars)
+def verify_filename(fname):
+	valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
+	return ''.join(c for c in fname if c in valid_chars)
 
 # this starts the server if you've called "python site.py"
 if __name__ == "__main__":
