@@ -73,7 +73,7 @@ class packages:
 			if repo_url.find('github.com') > -1 and repo_url.find('@') == -1 and repo_url.find('.git') == -1:
 				repo_url = repo_url + '.git'
 			os.system('cd ../ommod/node_modules && git clone ' + repo_url + ' && python update_modules.py &')
-			return "ok, I'm going to try that. Check back on <a href='/packages'>/packages</a> soon."
+			return "ok, I'm going to try that. Make sure you have an updated SIGNED.md file in the repo, from running 'keybase dir sign'. Check back on /packages soon."
 		except:
 			return "couldn't process that module posting =-("
 

@@ -15,13 +15,19 @@
         </div>
       </div>
       <div class="row">
-        <h4>Send a signed message</h4>
+        <h4>1. Add your package</h4>
+        <a href="/packages">Submit a link</a> to a public git repo. As of today (v0.0.5) you must have a SIGNED.md file created using the command 'keybase dir sign'
+      </div>
+      <div class="row">
+        <h4>2. Send me your public key</h4>
+        <p>Python gnupg won't match fingerprints without your full public key. In the 24 hours after you upload your package, I will try to find and import your public key, but you might just want to e-mail me (see bottom of page).</p>
+      </div>
+      <div class="row">
+        <h4>3. Send a signed message</h4>
         <form action="/sign" method="POST">
           <div class="col-md-6">
             <label>
-              npm package name (
-                <a href="/modules">did you add your repo?</a>
-              )
+              npm package name
             </label>
             <br/>
             <input class="form-control" name="repo"/>
