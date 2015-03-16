@@ -1,6 +1,6 @@
 # add dependencies
 from datetime import datetime
-import string, os, re, subprocess
+import string, os, re, subprocess, json
 import web, git
 import signatures
 
@@ -8,7 +8,8 @@ import signatures
 urls = (
 	'/', 'index',
 	'/sign', 'sign',
-	'/packages', 'packages'
+	'/packages', 'packages',
+	'/messages/(.+)', 'messages'
 )
 
 # prepare to render template files
@@ -116,6 +117,19 @@ class sign:
 				return "that didn't look like a signed message =-("
 		except:
 			return "couldn't process that message =-("
+
+class messages:
+	def GET(self, package):
+		if os.path.exists('../ommod/' + package + '.sig') and os.path.isfile('../ommod/' + package + '.sig'):
+			msgs = sorted(os.listdir('../ommod/' + package + '/'))
+			full = []
+			for msg in msgs:
+				m = open('../ommod/' + package + '/' + msg, 'r')
+				full.append(m.read())
+				m.close()
+			return json.dumps(full)
+		else:
+			return "[ \"couldn't find that package =-(\" ]"
 
 def verify_filename(fname):
 	valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
