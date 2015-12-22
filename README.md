@@ -24,19 +24,25 @@ Messages are checked for a signature matching their package, and stored as times
 
 ## Setup and Run
 
-Install dependencies, then run the server continuously on standard port 80:
-
 ```
-# dependencies
-sudo easy_install web.py
-pip install python-gnupg gitpython
+# system dependencies
+sudo apt-get install apache2 apache2-dev git python python-pip
 
-# installing Node.js and associated packages
-sudo apt-get install nodejs nodejs-legacy npm
+# install mod_wsgi module for Apache
+sudo apt-get install libapache2-mod-wsgi
 
-# running server
-nohup python site.py 80 &
-disown
+# set up your Apache config (this is how Ubuntu does it)
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/omegapm-mirror.org.conf
+# read http://webpy.org/cookbook/mod_wsgi-apache-ubuntu for more info on how to edit the config file
+
+# add the website to Apache
+sudo a2ensite omegapm.org
+sudo service apache2 reload
+
+# use LetsEncrypt to get HTTPS
+
+# Python dependencies
+pip install web.py python-gnupg gitpython
 ```
 
 ## License

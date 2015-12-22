@@ -2,7 +2,13 @@
 from datetime import datetime
 import string, os, re, subprocess, json
 import web, git
-import signatures
+import gnupg
+
+gpg = None
+def get_key_from_message(message):
+	gpg = gnupg.GPG()
+	gpg.encoding = 'utf-8'
+	return gpg.verify(message)
 
 # list all of the URLs for the server
 urls = (
@@ -18,7 +24,7 @@ app = None
 fingerprints = {}
 git_urls = {}
 mod_shas = {}
-render = web.template.render("templates/")
+render = web.template.render("/var/www/omegapm-org/templates/")
 
 # homepage
 class index:
@@ -87,7 +93,7 @@ class sign:
 		try:
 			msg = web.input()["msg"]
 			repo = '../ommod/' + verify_filename(web.input()["repo"])
-			verified = signatures.get_key_from_message(msg)
+			verified = get_key_from_message(msg)
 			if verified and verified.valid:
 				unix_time = int((datetime.now() - datetime(1970, 1, 1)).total_seconds())
 				expiry = int(verified.expire_timestamp)
@@ -172,7 +178,4 @@ def verify_filename(fname):
 	valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
 	return ''.join(c for c in fname if c in valid_chars)
 
-# this starts the server if you've called "python site.py"
-if __name__ == "__main__":
-	app = web.application(urls, globals())
-	app.run()
+app = web.application(urls, globals()).wsgifunc()
