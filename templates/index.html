@@ -11,98 +11,82 @@
       <div class="row">
         <div class="hero-unit">
           <h1>Ωpm <small>omega package manager</small></h1>
-          <h3>an npm variant featuring signed packages and identical builds</h3>
+          <h3>check for signed messages from package developers</h3>
         </div>
       </div>
       <div class="row">
-        <h3>0.0.5 - what is Ωpm today?</h3>
+        <h3>1.0.0 - what is Ωpm today?</h3>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h4>Signed</h4>
-          <p>A PGP signature verifies that the code you download matches what the developer wrote. OmegaPM can't fake the signature.</p>
-          <p>Get signed update messages for your app's packages by running 'omegapm status'</p>
+          <h4>Dependency checker</h4>
+          <p>Check for updates from any of your dependencies with one command: <pre>omegapm status</pre></p>
         </div>
         <div class="col-md-4">
-          <h4>Restricted</h4>
-          <p>
-            NPM runs arbitrary commands during the install process
-            (<a href="https://github.com/joaojeronimo/rimrafall#rimrafall">that can be dangerous!</a>).
-            OmegaPM won't run scripts, even to compile code.
-          </p>
-          <p>That doesn't stop you or the package from running fs.delete later on... but it does keep the install clean.</p>
+          <h4>Secure</h4>
+          <p>OmegaPM checks that the PGP signature on each message matches the public key in the module downloaded to your computer.</p>
+          <p>That means that OmegaPM, NPM, and other third parties cannot fake messages after a package is downloaded.</p>
         </div>
         <div class="col-md-4">
-          <h4>Identical</h4>
-          <p>The code on your local machine, your server, the Ωpm website, GitHub, and the developer's machine ought to be the same. With JS-only packages, we can have consistent, <a href="https://blog.torproject.org/blog/deterministic-builds-part-one-cyberwar-and-global-compromise">reproducible builds</a>.</p>
-          <p>Node's require is replaced with a custom function that checks that packages' SHAs match every time you run your server.</p>
+          <h4>NodeJS and Ruby</h4>
+          <p>This release is being made available for NodeJS and Rails apps.</p>
         </div>
       </div>
       <div class="row">
         <h3>Installing</h3>
         <div class="col-md-6">
           <h4>CLI</h4>
-          You install OmegaPM and <a href="https://keybase.io">Keybase</a> using NPM. A Keybase account is optional.
-          <pre>
-npm install omegapm 
-npm install keybase-installer -g
-keybase-installer
-keybase config
-          </pre>
+          <pre>npm install omegapm -g</pre>
+          <h4>package.json</h4>
+          <p>Add a public key:
+            <pre>
+              {
+                "name": "omegapm",
+                "publicKey": "key_file.asc"
+              }
+            </pre>
+          </p>
         </div>
         <div class="col-md-6">
           <h4>Packages</h3>
           <a href="/packages">
-            <h4>See what's available, and add new packages.</h4>
+            <h4>See who's using OmegaPM, and read more about adding public keys to your own packages.</h4>
           </a>
           <a href="/sign">
-            <h4>Developer-signed messages</h4>
+            <h4>Developers: add signed messages here</h4>
           </a>
-          <pre>
-# install and verify a simple package
-omegapm install omega-sqrt
-          </pre>
         </div>
         <br/>
         <br/>
       </div>
       <div class="row">
-        <h3>0.0.6+ - what's next?</h3>
+        <h3>1.1.0+ - what's next?</h3>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h4>Open Standards</h4> 
-          <p>Ωpm should be able to download packages from a regular git repo, if its commits are signed using
-            <span class="nowrap">'git commit -S'</span>. It should be able to accept packages signed with gpg-zip or other open signing systems.
+          <h4>Open Standards</h4>
+          <p>Ωpm should be able to read messages from a git repo, if their commits are signed with
+            <span class="nowrap">'git commit -S'</span>.
           </p>
         </div>
         <div class="col-md-4">
-          <h4>Beating Metadata</h4> 
-          <p>Padding and encrypting downloads would keep third parties from knowing what you're downloading.</p>
-          <p>The first step would be storing code repos on Ωpm servers, which comes with its own scaling and legal issues.</p>
+          <h4>Beating Metadata</h4>
+          <p>Padding and combining messages would keep third parties from knowing what you're reading.</p>
         </div>
         <div class="col-md-4">
           <h4>HTTPS and Tor</h4>
           <p>I launched before becoming HTTPS-ready. Got to work on that.</p>
-          <p>You could also use Tails today, but looking forward, Ωpm should have its own hidden service on Tor.</p>
+          <p>Ωpm should have a hidden service on Tor so package developers and users can communicate without being in the open.</p>
         </div>
       </div>
       <div class="row">
         <h3>Join in on GitHub</h3>
         <li class="repo">
-          <a href="https://github.com/mapmeld/omegapm">Ωpm CLI - main repo</a>
+          <a href="https://github.com/mapmeld/omegapm">OmegaPM - NodeJS repo</a>
         </li>
         /
         <li class="repo">
-          <a href="https://github.com/mapmeld/omega-sqrt">sqrt - a sample signed package</a>
-        </li>
-        /
-        <li class="repo">
-          <a href="https://github.com/mapmeld/omegapm-require">omegapm-require - a SHA-checking replacement for require</a>
-        </li>
-        /
-        <li class="repo">
-          <a href="https://github.com/mapmeld/omega-template-app">Template App - using sqrt</a>
+          <a href="https://github.com/mapmeld/omegapm-ruby">OmegaPM - Rails repo</a>
         </li>
       </div>
       <div class="row">
@@ -116,12 +100,11 @@ omegapm install omega-sqrt
       </div>
       <div class="row">
         <h4>Contact Me</h4>
-        <p>I'm Nick Doiron, a web developer and mapmaker based in New York City.
+        <p>I'm Nick Doiron, a traveling web developer and mapmaker.
           <br/>
           - Write me an e-mail: <a href="mailto:ndoiron@mapmeld.com">ndoiron@mapmeld.com</a>
-            (optional) encrypt messages for this key: <a href="https://keybase.io/mapmeld/key.asc">359B 8E77 522B 3449</a>
           <br/>
-          - Send me a Tweet: <a href="https://twitter.com/mapmeld">@mapmeld</a>
+          - Tweet: <a href="https://twitter.com/mapmeld">@mapmeld</a>
         </p>
         <br/><br/><br/><br/>
       </div>

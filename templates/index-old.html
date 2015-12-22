@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>OmegaPM</title>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="hero-unit">
+          <h1>Ωpm <small>omega package manager</small></h1>
+          <h3>an npm variant featuring signed packages and identical builds</h3>
+        </div>
+      </div>
+      <div class="row">
+        <h3>0.0.5 - what is Ωpm today?</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Signed</h4>
+          <p>A PGP signature verifies that the code you download matches what the developer wrote. OmegaPM can't fake the signature.</p>
+          <p>Get signed update messages for your app's packages by running 'omegapm status'</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Restricted</h4>
+          <p>
+            NPM runs arbitrary commands during the install process
+            (<a href="https://github.com/joaojeronimo/rimrafall#rimrafall">that can be dangerous!</a>).
+            OmegaPM won't run scripts, even to compile code.
+          </p>
+          <p>That doesn't stop you or the package from running fs.delete later on... but it does keep the install clean.</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Identical</h4>
+          <p>The code on your local machine, your server, the Ωpm website, GitHub, and the developer's machine ought to be the same. With JS-only packages, we can have consistent, <a href="https://blog.torproject.org/blog/deterministic-builds-part-one-cyberwar-and-global-compromise">reproducible builds</a>.</p>
+          <p>Node's require is replaced with a custom function that checks that packages' SHAs match every time you run your server.</p>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Installing</h3>
+        <div class="col-md-6">
+          <h4>CLI</h4>
+          You install OmegaPM and <a href="https://keybase.io">Keybase</a> using NPM. A Keybase account is optional.
+          <pre>
+npm install omegapm
+npm install keybase-installer -g
+keybase-installer
+keybase config
+          </pre>
+        </div>
+        <div class="col-md-6">
+          <h4>Packages</h3>
+          <a href="/packages">
+            <h4>See what's available, and add new packages.</h4>
+          </a>
+          <a href="/sign">
+            <h4>Developer-signed messages</h4>
+          </a>
+          <pre>
+# install and verify a simple package
+omegapm install omega-sqrt
+          </pre>
+        </div>
+        <br/>
+        <br/>
+      </div>
+      <div class="row">
+        <h3>0.0.6+ - what's next?</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Open Standards</h4>
+          <p>Ωpm should be able to download packages from a regular git repo, if its commits are signed using
+            <span class="nowrap">'git commit -S'</span>. It should be able to accept packages signed with gpg-zip or other open signing systems.
+          </p>
+        </div>
+        <div class="col-md-4">
+          <h4>Beating Metadata</h4>
+          <p>Padding and encrypting downloads would keep third parties from knowing what you're downloading.</p>
+          <p>The first step would be storing code repos on Ωpm servers, which comes with its own scaling and legal issues.</p>
+        </div>
+        <div class="col-md-4">
+          <h4>HTTPS and Tor</h4>
+          <p>I launched before becoming HTTPS-ready. Got to work on that.</p>
+          <p>You could also use Tails today, but looking forward, Ωpm should have its own hidden service on Tor.</p>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Join in on GitHub</h3>
+        <li class="repo">
+          <a href="https://github.com/mapmeld/omegapm">Ωpm CLI - main repo</a>
+        </li>
+        /
+        <li class="repo">
+          <a href="https://github.com/mapmeld/omega-sqrt">sqrt - a sample signed package</a>
+        </li>
+        /
+        <li class="repo">
+          <a href="https://github.com/mapmeld/omegapm-require">omegapm-require - a SHA-checking replacement for require</a>
+        </li>
+        /
+        <li class="repo">
+          <a href="https://github.com/mapmeld/omega-template-app">Template App - using sqrt</a>
+        </li>
+      </div>
+      <div class="row">
+        <h4>Thanks to</h4>
+        <p>
+          <a href="http://keybase.io">Keybase</a> for their awesome directory-signing tool,
+          Mike Gerwitz for <a href="http://mikegerwitz.com/papers/git-horror-story">explaining git-repo-signing</a> so well,
+          and João Jerónimo for <a href="https://github.com/joaojeronimo/rimrafall#rimrafall">testing npm</a>.
+          Their feedback on this project was helpful and informative.
+        </p>
+      </div>
+      <div class="row">
+        <h4>Contact Me</h4>
+        <p>I'm Nick Doiron, a web developer and mapmaker based in New York City.
+          <br/>
+          - Write me an e-mail: <a href="mailto:ndoiron@mapmeld.com">ndoiron@mapmeld.com</a>
+            (optional) encrypt messages for this key: <a href="https://keybase.io/mapmeld/key.asc">359B 8E77 522B 3449</a>
+          <br/>
+          - Send me a Tweet: <a href="https://twitter.com/mapmeld">@mapmeld</a>
+        </p>
+        <br/><br/><br/><br/>
+      </div>
+    </div>
+  </body>
+</html>
